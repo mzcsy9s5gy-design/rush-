@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RUSH – skoki na rowerze, elektryczne motocykle terenowe, snowboard</title>
+<meta name="description" content="Szkolenia w małych grupach: skoki na rowerze, jazda na elektrycznych motocyklach terenowych i nauka snowboardu. Sprzęt ochronny w cenie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --page:#EDF2F5; --text:#0E2233; --muted:#455C6E; --line:#B7C8D3; --panel:#FFFFFF;
+  --signal:#FFC21A; --navy:#0E2233;
+  --band-dark:#0E2233; --band-dark-text:#EAF2F7;
+  --band-ice:#A9CDE0; --band-ice-text:#0E2233; --ice-muted:#27455C; --ice-line:#7FA8BF; --ice-link:#0E2233;
+  --focus:#1F5F86; --link:#1F5F86; --moto-fill:#0E2233; --snow-fill:#6FB1D3;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#0A1620; --text:#E8F0F5; --muted:#9FB4C3; --line:#29404F; --panel:#12212D;
+    --band-dark:#040B11; --band-ice:#15364A; --band-ice-text:#E8F0F5; --ice-muted:#B4CEDD; --ice-line:#31566D; --ice-link:#FFC21A;
+    --focus:#FFC21A; --link:#8CC4E2; --moto-fill:#E8F0F5; --snow-fill:#4F97BC;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#0A1620; --text:#E8F0F5; --muted:#9FB4C3; --line:#29404F; --panel:#12212D;
+  --band-dark:#040B11; --band-ice:#15364A; --band-ice-text:#E8F0F5; --ice-muted:#B4CEDD; --ice-line:#31566D; --ice-link:#FFC21A;
+  --focus:#FFC21A; --link:#8CC4E2; --moto-fill:#E8F0F5; --snow-fill:#4F97BC;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{background:var(--page);scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{
+  margin:0;background:var(--page);color:var(--text);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  font-size:1.0625rem;line-height:1.6;
+}
+img,svg{max-width:100%}
+a{color:var(--link)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(20px,5vw,48px)}
+
+.display{
+  font-family:"Archivo","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  font-stretch:72%;font-weight:800;line-height:.95;letter-spacing:-.005em;margin:0;
+}
+h2.display{font-size:clamp(2.6rem,8vw,5.25rem)}
+h3{font-size:1.1rem;margin:0 0 .6em;font-weight:700}
+p{margin:0 0 1em;max-width:62ch}
+
+/* przyciski */
+.btn{
+  display:inline-block;padding:14px 22px;min-height:48px;
+  background:var(--signal);color:var(--navy);font:inherit;font-weight:700;
+  text-decoration:none;border:0;border-radius:3px;cursor:pointer;
+}
+.btn:hover{background:#FFD24D}
+.btn:focus-visible{outline-color:var(--focus)}
+.btn--sm{padding:9px 16px;min-height:44px;font-size:.95rem}
+.textlink{font-weight:700;color:var(--link);text-underline-offset:4px}
+
+/* nagłówek */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px}
+.brand{font-size:2.1rem;text-decoration:none;color:var(--text)}
+.top nav{display:flex;align-items:center;gap:26px}
+.top nav a.nav-link{color:var(--text);text-decoration:none;font-weight:500}
+.top nav a.nav-link:hover{text-decoration:underline;text-underline-offset:4px}
+@media (max-width:759px){
+  .top{flex-wrap:wrap;row-gap:4px}
+  .top nav{width:100%;overflow-x:auto;gap:20px;white-space:nowrap;padding-bottom:6px}
+}
+
+/* pasy dyscyplin */
+.band{padding-block:clamp(56px,9vw,112px)}
+.band--rower{background:var(--panel);color:var(--text)}
+.band--moto{background:var(--band-dark);color:var(--band-dark-text);--muted:#A9BFCE;--line:#2C4658;--focus:#FFC21A;--link:#FFC21A}
+.band--snow{background:var(--band-ice);color:var(--band-ice-text);--muted:var(--ice-muted);--line:var(--ice-line);--link:var(--ice-link);--focus:var(--band-ice-text)}
+.band .grid{display:grid;gap:clamp(24px,5vw,72px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:860px){
+  .band .grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+  .band--flip .grid>:first-child{order:2}
+}
+.terrain{display:block;width:100%;height:auto;margin-top:22px;overflow:visible}
+.terrain path{fill:none;stroke:currentColor;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.terrain .gap{stroke-dasharray:2 9}
+.terrain circle{fill:var(--signal);stroke:currentColor;stroke-width:3.5}
+.band .lead{font-size:1.15rem}
+.band ul{margin:0 0 1.6em;padding-left:1.15em;max-width:56ch}
+.band li{margin-bottom:.45em}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin:0 0 28px;padding-top:18px;border-top:2px solid var(--line)}
+.facts dt{font-size:.9rem;color:var(--muted)}
+.facts dd{margin:0;font-weight:600}
+.facts .wide{grid-column:1/-1}
+
+/* dobór szkolenia */
+.section{padding-block:clamp(56px,9vw,104px)}
+.picker{display:grid;gap:clamp(28px,5vw,64px);grid-template-columns:minmax(0,1fr);margin-top:clamp(28px,4vw,48px)}
+@media (min-width:860px){.picker{grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:start}}
+fieldset{border:0;padding:0;margin:0 0 28px}
+legend{font-weight:700;margin-bottom:12px;padding:0}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{
+  font:inherit;font-weight:600;color:var(--text);background:transparent;
+  border:2px solid var(--text);border-radius:3px;padding:10px 16px;min-height:46px;cursor:pointer;
+}
+.seg button[aria-pressed="true"]{background:var(--signal);border-color:var(--signal);color:var(--navy)}
+.seg button:disabled{opacity:.4;cursor:not-allowed;border-style:dashed}
+.result{background:var(--panel);border-left:8px solid var(--signal);padding:clamp(22px,4vw,36px)}
+.result h3{font-family:"Archivo","Arial Narrow",Arial,sans-serif;font-stretch:72%;font-weight:800;font-size:clamp(2rem,5.5vw,3rem);line-height:1;margin:0 0 .5em}
+.result .meta{display:flex;flex-wrap:wrap;gap:6px 28px;margin:0 0 1.1em;padding:0;list-style:none}
+.result .meta li{margin:0}
+.result .meta b{display:block;font-size:1.25rem;line-height:1.2}
+.result .meta span{font-size:.88rem;color:var(--muted)}
+
+/* sezon */
+.months,.season{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.months{margin-top:clamp(28px,4vw,44px);font-size:.75rem;color:var(--muted);text-align:center}
+.srow{margin-top:20px}
+.srow .h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 16px;margin-bottom:6px}
+.srow .h b{font-weight:700}
+.srow .h span{color:var(--muted);font-size:.95rem}
+.season i{display:block;height:26px;border:1px solid var(--line);border-radius:2px}
+.season i.on{border-color:transparent}
+.season.bike i.on{background:var(--signal)}
+.season.moto i.on{background:var(--moto-fill)}
+.season.snow i.on{background:var(--snow-fill)}
+.note{color:var(--muted);font-size:.95rem;margin-top:22px}
+
+/* w cenie */
+.incl{display:grid;gap:0 clamp(24px,5vw,64px);grid-template-columns:minmax(0,1fr);margin-top:clamp(24px,4vw,44px)}
+@media (min-width:760px){.incl{grid-template-columns:1fr 1fr}}
+.incl div{border-top:2px solid var(--text);padding:18px 0 26px}
+.incl h3{font-family:"Archivo","Arial Narrow",Arial,sans-serif;font-stretch:72%;font-weight:800;font-size:1.7rem;line-height:1.05;margin-bottom:.35em}
+.incl p{margin:0;color:var(--muted)}
+
+/* o mnie */
+.about{background:var(--panel)}
+.about .grid2{display:grid;gap:clamp(24px,5vw,72px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:860px){.about .grid2{grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:start}}
+.about .lead{font-size:1.2rem}
+.about .facts{margin-top:28px;margin-bottom:0}
+
+/* FAQ */
+.faq{margin-top:clamp(24px,4vw,40px);max-width:820px}
+.faq details{border-top:2px solid var(--line)}
+.faq details:last-child{border-bottom:2px solid var(--line)}
+.faq summary{
+  list-style:none;cursor:pointer;padding:18px 44px 18px 0;position:relative;font-weight:700;font-size:1.1rem;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:1.6rem;font-weight:400}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{padding-bottom:18px;margin:0;color:var(--muted)}
+
+/* kontakt */
+.contact{background:var(--band-dark);color:var(--band-dark-text);--muted:#A9BFCE;--focus:#FFC21A;--link:#FFC21A;--line:#2C4658}
+.contact .grid{display:grid;gap:clamp(28px,5vw,72px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:860px){.contact .grid{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}}
+form{display:grid;gap:18px}
+.two{display:grid;gap:18px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:560px){.two{grid-template-columns:1fr 1fr}}
+label{display:block;font-weight:600;margin-bottom:6px}
+input,select,textarea{
+  width:100%;font:inherit;font-size:1rem;color:#0E2233;background:#F4F8FA;
+  border:2px solid #F4F8FA;border-radius:3px;padding:12px 14px;min-height:48px;
+}
+textarea{min-height:120px;resize:vertical}
+.check{display:flex;align-items:center;gap:12px;font-weight:500;margin:0;cursor:pointer}
+.check input{width:24px;height:24px;min-height:24px;padding:0;flex:none;accent-color:#FFC21A}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+#status{min-height:1.5em;color:var(--muted);font-size:.95rem;margin:0}
+footer{background:var(--band-dark);color:#A9BFCE;padding:26px 0 34px;font-size:.92rem;border-top:1px solid #1B3345}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
+footer a{color:#EAF2F7}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="brand display" href="#top" aria-label="RUSH – strona główna">RUSH</a>
+  <nav aria-label="Główna nawigacja">
+    <a class="nav-link" href="#szkolenia">Szkolenia</a>
+    <a class="nav-link" href="#dobierz">Dobierz kurs</a>
+    <a class="nav-link" href="#sezon">Sezon</a>
+    <a class="nav-link" href="#o-mnie">O mnie</a>
+    <a class="btn btn--sm" href="#kontakt">Zapytaj o termin</a>
+  </nav>
+</header>
+
+<main id="top">
+<div id="szkolenia">
+  <!-- ROWER -->
+  <section class="band band--rower" aria-labelledby="h-rower">
+    <div class="wrap grid">
+      <div>
+        <h2 id="h-rower" class="display">Rower</h2>
+        <svg class="terrain" viewBox="0 0 600 120" aria-hidden="true" focusable="false">
+          <path d="M0 100 L110 100 L170 62"/>
+          <path class="gap" d="M170 62 Q250 0 330 62"/>
+          <path d="M330 62 L390 100 L600 100"/>
+          <circle cx="250" cy="31" r="8"/>
+        </svg>
+      </div>
+      <div>
+        <p class="lead">Od pierwszego najazdu na hopkę po lądowanie doubli. W kolejności, w której nie boli: najpierw pozycja i tempo. Dopiero potem wysokość i odległość.</p>
+        <h3>Czego się nauczysz</h3>
+        <ul>
+          <li>zachowania właściwej pozycji ciała,</li>
+          <li>płynnego poruszania się po przeszkodach,</li>
+          <li>bezpiecznego upadania.</li>
+        </ul>
+        <dl class="facts">
+          <div><dt>Czas</dt><dd>2 godziny</dd></div>
+          <div><dt>Grupa</dt><dd>do 4 osób</dd></div>
+          <div class="wide"><dt>Sprzęt w wypożyczeniu</dt><dd>rower MTB lub dirt, kask integralny, ochraniacze</dd></div>
+          <div class="wide"><dt>Po zajęciach</dt><dd>wideoanaliza przejazdów z instruktorem</dd></div>
+          <div class="wide"><dt>Opcjonalnie</dt><dd>wypożyczenie kamery GoPro</dd></div>
+          <div><dt>Wiek</dt><dd>od 12 lat</dd></div>
+        </dl>
+        <a class="textlink" href="#dobierz" data-pick="rower">Dobierz poziom zajęć</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTOCYKLE -->
+  <section class="band band--moto band--flip" aria-labelledby="h-moto">
+    <div class="wrap grid">
+      <div>
+        <h2 id="h-moto" class="display">Elektryczne motocykle terenowe</h2>
+        <svg class="terrain" viewBox="0 0 600 120" aria-hidden="true" focusable="false">
+          <path d="M0 104 L80 104 L160 72 L200 82 L245 60 L285 70 L335 42 L375 52 L425 26 L600 26"/>
+          <circle cx="335" cy="42" r="8"/>
+        </svg>
+      </div>
+      <div>
+        <p class="lead">Lekkie, ciche, z natychmiastowym momentem obrotowym. Elektryczny motocykl terenowy wybacza więcej niż ciężka maszyna spalinowa, więc dobrze sprawdza się na pierwszy raz. A na trudnym torze i tak da się przy nim zmęczyć.</p>
+        <h3>Czego się nauczysz</h3>
+        <ul>
+          <li>jazdy na stojąco i pracy ciałem w terenie,</li>
+          <li>dozowania gazu i hamowania na luźnej nawierzchni,</li>
+          <li>podjazdów, zjazdów i przejazdów przez trudne formy terenowe,</li>
+          <li>pierwszych skoków.</li>
+        </ul>
+        <dl class="facts">
+          <div><dt>Czas</dt><dd>3 godziny</dd></div>
+          <div><dt>Grupa</dt><dd>do 3 osób</dd></div>
+          <div class="wide"><dt>Sprzęt w wypożyczeniu</dt><dd>motocykl, kask, ochraniacze, buty</dd></div>
+          <div class="wide"><dt>Gdzie</dt><dd>zamknięty tor oraz nieutwardzone drogi gruntowe</dd></div>
+          <div class="wide"><dt>Po zajęciach</dt><dd>wideoanaliza przejazdów z instruktorem</dd></div>
+          <div class="wide"><dt>Opcjonalnie</dt><dd>wypożyczenie kamery GoPro</dd></div>
+          <div><dt>Wiek</dt><dd>od 14 lat</dd></div>
+        </dl>
+        <a class="textlink" href="#dobierz" data-pick="moto">Dobierz poziom zajęć</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SNOWBOARD -->
+  <section class="band band--snow" aria-labelledby="h-snow">
+    <div class="wrap grid">
+      <div>
+        <h2 id="h-snow" class="display">Snowboard w snowparku</h2>
+        <svg class="terrain" viewBox="0 0 600 120" aria-hidden="true" focusable="false">
+          <path d="M0 30 C150 40 260 80 420 96 L600 100"/>
+          <circle cx="206" cy="61" r="8"/>
+        </svg>
+      </div>
+      <div>
+        <p class="lead">Dla osób, które już pewnie jeżdżą na desce i chcą zacząć w snowparku. Każdy element ćwiczymy najpierw na płaskim, dopiero potem na małych hopkach i boxach, żeby pierwsze lądowania były pod kontrolą.</p>
+        <h3>Czego się nauczysz</h3>
+        <ul>
+          <li>najazdu na hopę i kontroli prędkości,</li>
+          <li>pozycji ciała w powietrzu i przy lądowaniu,</li>
+          <li>pierwszych elementów na boxie,</li>
+          <li>zasad jazdy w snowparku: kolejności, sygnałów i wyboru linii.</li>
+        </ul>
+        <dl class="facts">
+          <div class="wide"><dt>Dla kogo</dt><dd>dla osób, które już jeżdżą i chcą zacząć jazdę w snowparku</dd></div>
+          <div><dt>Czas</dt><dd>2 godziny</dd></div>
+          <div><dt>Grupa</dt><dd>do 2 osób</dd></div>
+          <div class="wide"><dt>Sprzęt w wypożyczeniu</dt><dd>kask, ochraniacze na kolana</dd></div>
+          <div class="wide"><dt>Przywozisz własne</dt><dd>deskę i buty snowboardowe</dd></div>
+          <div class="wide"><dt>Po zajęciach</dt><dd>wideoanaliza przejazdów z instruktorem</dd></div>
+          <div class="wide"><dt>Opcjonalnie</dt><dd>wypożyczenie kamery GoPro</dd></div>
+          <div><dt>Wiek</dt><dd>od 8 lat</dd></div>
+        </dl>
+        <a class="textlink" href="#dobierz" data-pick="snow">Dobierz poziom zajęć</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- DOBÓR -->
+<section class="section" id="dobierz" aria-labelledby="h-pick">
+  <div class="wrap">
+    <h2 id="h-pick" class="display">Wybierz dyscyplinę<br>i poziom</h2>
+    <div class="picker">
+      <div>
+        <fieldset>
+          <legend>Dyscyplina</legend>
+          <div class="seg" id="disc">
+            <button type="button" data-v="rower" aria-pressed="true">Rower</button>
+            <button type="button" data-v="moto" aria-pressed="false">Motocykl</button>
+            <button type="button" data-v="snow" aria-pressed="false">Snowboard</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Twój poziom</legend>
+          <div class="seg" id="lvl">
+            <button type="button" data-v="start" aria-pressed="true">Pierwszy raz</button>
+            <button type="button" data-v="mid" aria-pressed="false">Już jeżdżę</button>
+          </div>
+          <p class="note" id="lvl-note" style="margin-top:12px" hidden>Snowboard prowadzimy tylko dla osób, które już jeżdżą.</p>
+        </fieldset>
+      </div>
+      <div class="result" id="result" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEZON -->
+<section class="section" id="sezon" aria-labelledby="h-season" style="padding-top:0">
+  <div class="wrap">
+    <h2 id="h-season" class="display">Kiedy jeździmy</h2>
+    <div class="months" id="months" aria-hidden="true"></div>
+    <div id="rows"></div>
+    <p class="note">Terminy snowboardu zależą od warunków na stoku, więc potwierdzamy je na bieżąco. Zajęcia rowerowe i motocyklowe odbywają się od wiosny do jesieni.</p>
+  </div>
+</section>
+
+<!-- W CENIE -->
+<section class="section" style="padding-top:0" aria-labelledby="h-incl">
+  <div class="wrap">
+    <h2 id="h-incl" class="display">W cenie każdego szkolenia</h2>
+    <div class="incl">
+      <div><h3>Sprzęt ochronny</h3><p>Kask i ochraniacze dobrane do Twojego rozmiaru. Sprawdzamy je przed pierwszym przejazdem.</p></div>
+      <div><h3>Mała grupa</h3><p>Instruktor widzi każdy Twój przejazd i mówi, co poprawić, zanim to wejdzie w nawyk.</p></div>
+      <div><h3>Plan pod Twój poziom</h3><p>Tempo i elementy dostosowuję indywidualnie pod kątem Waszych umiejętności i warunków fizycznych.</p></div>
+      <div><h3>Wideoanaliza po zajęciach</h3><p>Po każdym bloku oglądamy nagrane przejazdy i pokazujemy, co zmienić w pozycji, tempie albo lądowaniu.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="padding-top:0" aria-labelledby="h-faq">
+  <div class="wrap">
+    <h2 id="h-faq" class="display">Pytania przed zapisem</h2>
+    <div class="faq">
+      <details>
+        <summary>Czy muszę mieć własny sprzęt?</summary>
+        <p>Na rower i motocykl nie: kask, ochraniacze oraz rower lub motocykl są w wypożyczeniu. Na snowboard przywozisz własną deskę i buty, a my wypożyczamy kask i ochraniacze na kolana.</p>
+      </details>
+      <details>
+        <summary>Czy mogę wypożyczyć kamerę GoPro?</summary>
+        <p>Tak, kamerę GoPro możesz wypożyczyć na czas zajęć. Nagrane przejazdy oglądamy razem po każdym bloku, w ramach wideoanalizy.</p>
+      </details>
+      <details>
+        <summary>Nigdy nie skakałem. Czy to dla mnie?</summary>
+        <p>Tak, jeśli chodzi o rower i motocykl. Pierwsze zajęcia zaczynamy na płaskim terenie i w wolnym tempie, a wysokość dodajemy dopiero wtedy, gdy technika jest stabilna. Snowboard prowadzimy tylko dla osób, które już jeżdżą i chcą zacząć w snowparku.</p>
+      </details>
+      <details>
+        <summary>Co jeśli pogoda się zepsuje?</summary>
+        <p>Przy silnym deszczu, wietrze albo złych warunkach na stoku przenosimy zajęcia na inny termin, bez dodatkowych kosztów.</p>
+      </details>
+      <details>
+        <summary>Czy mogę zapisać dziecko?</summary>
+        <p>Tak: na rower od 12 lat, na motocykl od 14, na snowboard od 8. Osoby niepełnoletnie potrzebują pisemnej zgody opiekuna.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- O MNIE -->
+<section class="section about" id="o-mnie" aria-labelledby="h-about">
+  <div class="wrap grid2">
+    <h2 id="h-about" class="display">O mnie</h2>
+    <div>
+      <p class="lead">Nazywam się Artur Dmowski. Jestem licencjonowanym instruktorem snowboardu z 15-letnim doświadczeniem w szkoleniu na stoku i w snowparku.</p>
+      <p>Od dziecka jestem nierozłącznie związany z popisami na jednośladach. Dlatego latem przenoszę swoje działania na rower i elektryczne motocykle off-road.</p>
+      <dl class="facts">
+        <div><dt>Zimą</dt><dd>snowboard: stok i snowpark</dd></div>
+        <div><dt>Latem</dt><dd>rower i elektryczne motocykle off-road</dd></div>
+        <div class="wide"><dt>Uprawnienia i doświadczenie</dt><dd>licencjonowany instruktor snowboardu, 15 lat w szkoleniu</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="section contact" id="kontakt" aria-labelledby="h-contact">
+  <div class="wrap grid">
+    <div>
+      <h2 id="h-contact" class="display">Zapytaj o termin</h2>
+      <p style="margin-top:1em">Napisz, co Cię interesuje. Odpowiadamy w ciągu jednego dnia roboczego i podpowiadamy najbliższy wolny termin.</p>
+      <p>kontakt@rush.example<br><a href="tel:+48533496331">533 496 331</a><br><a href="https://www.instagram.com/dmo_sky/" target="_blank" rel="noopener">Instagram: @dmo_sky</a></p>
+    </div>
+    <form id="form">
+      <div class="two">
+        <div><label for="f-name">Imię</label><input id="f-name" name="name" autocomplete="given-name" required></div>
+        <div><label for="f-mail">E-mail</label><input id="f-mail" name="mail" type="email" autocomplete="email" required></div>
+      </div>
+      <div class="two">
+        <div>
+          <label for="f-disc">Szkolenie</label>
+          <select id="f-disc">
+            <option value="rower">Skoki na rowerze</option>
+            <option value="moto">Elektryczny motocykl terenowy</option>
+            <option value="snow">Snowboard</option>
+          </select>
+        </div>
+        <div>
+          <label for="f-lvl">Poziom</label>
+          <select id="f-lvl">
+            <option value="start">Pierwszy raz</option>
+            <option value="mid">Już jeżdżę</option>
+          </select>
+        </div>
+      </div>
+      <label class="check" for="f-gopro"><input type="checkbox" id="f-gopro"> Chcę wypożyczyć kamerę GoPro</label>
+      <div><label for="f-msg">Wiadomość (opcjonalnie)</label><textarea id="f-msg" name="msg"></textarea></div>
+      <div><button class="btn" type="submit">Wyślij zapytanie</button></div>
+      <p id="status" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 RUSH. Szkolenia w małych grupach.</span>
+    <span><a href="tel:+48533496331">533 496 331</a> · <a href="https://www.instagram.com/dmo_sky/" target="_blank" rel="noopener">@dmo_sky</a> · <a href="mailto:kontakt@rush.example">kontakt@rush.example</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Dane kursów */
+  var NAMES = {rower:'Skoki na rowerze', moto:'Elektryczny motocykl terenowy', snow:'Snowboard'};
+  var LEVELS = {start:'Pierwszy raz', mid:'Już jeżdżę'};
+  var D = {
+    rower:{
+      start:{name:'Pump track i pierwsze hopy', time:'2 godziny', group:'do 4 osób', price:'250 zł', text:'Zachowania właściwej pozycji ciała i kontroli nad rowerem.'},
+      mid:{name:'Większe hopy i dropy', time:'2 godziny', group:'do 4 osób', price:'250 zł', text:'Większe skocznie, skocznie z dziurą, dropy i bandy.'}
+    },
+    moto:{
+      start:{name:'Pierwsze kilometry w terenie', time:'3 godziny', group:'do 3 osób', price:'450 zł', text:'Start, hamowanie, zakręty i jazda na stojąco na lekkim motocyklu elektrycznym, na płaskim, równym terenie.'},
+      mid:{name:'Podjazdy, zjazdy, koleiny', time:'3 godziny', group:'do 3 osób', price:'450 zł', text:'Uczysz się patrzeć dalej niż przednie koło i dobierać gaz do nawierzchni. Bez tego teren szybko Cię zmęczy.'}
+    },
+    snow:{
+      start:{name:'Pewność przed snowparkiem', time:'2 godziny', group:'do 2 osób', price:'300 zł', text:'Dla osób, które mają już podstawy jazdy na desce i chcą nabrać pewności przed pierwszym snowparkiem.'},
+      mid:{name:'Pierwszy snowpark', time:'2 godziny', group:'do 2 osób', price:'300 zł', text:'Dla osób, które już jeżdżą i chcą zacząć w snowparku: małe hopki, boxy, zasady bezpieczeństwa.'}
+    }
+  };
+
+  function startLabel(d){ return d === 'snow' ? 'AMATOR' : 'Pierwszy raz'; }
+  function midLabel(d){ return d === 'rower' ? 'Już skaczę' : 'Już jeżdżę'; }
+  var disc = 'rower', lvl = 'start';
+  var out = document.getElementById('result');
+
+  function render(){
+    var c = D[disc][lvl];
+    out.innerHTML =
+      '<h3>' + c.name + '</h3>' +
+      '<ul class="meta">' +
+        '<li><b>' + c.time + '</b><span>czas</span></li>' +
+        '<li><b>' + c.group + '</b><span>grupa</span></li>' +
+        '<li><b>' + c.price + '</b><span>cena</span></li>' +
+      '</ul>' +
+      '<p>' + c.text + '</p>' +
+      '<a class="btn" id="ask" href="#kontakt">Zapytaj o termin</a>';
+    document.getElementById('ask').addEventListener('click', syncForm);
+    [].forEach.call(document.querySelectorAll('#disc button'), function(b){ b.setAttribute('aria-pressed', b.dataset.v === disc); });
+    [].forEach.call(document.querySelectorAll('#lvl button'), function(b){ b.setAttribute('aria-pressed', b.dataset.v === lvl); });
+    document.querySelector('#lvl button[data-v="start"]').textContent = startLabel(disc);
+    document.querySelector('#lvl button[data-v="mid"]').textContent = midLabel(disc);
+    document.getElementById('lvl-note').hidden = (disc !== 'snow');
+  }
+  function syncLevelOptions(){
+    var d = document.getElementById('f-disc').value;
+    var sel = document.getElementById('f-lvl');
+    sel.querySelector('option[value="start"]').textContent = startLabel(d);
+    sel.querySelector('option[value="mid"]').textContent = midLabel(d);
+  }
+  function syncForm(){
+    document.getElementById('f-disc').value = disc;
+    document.getElementById('f-lvl').value = lvl;
+    syncLevelOptions();
+  }
+  document.getElementById('f-disc').addEventListener('change', syncLevelOptions);
+  syncLevelOptions();
+
+  [].forEach.call(document.querySelectorAll('#disc button'), function(b){
+    b.addEventListener('click', function(){ disc = b.dataset.v; render(); });
+  });
+  [].forEach.call(document.querySelectorAll('#lvl button'), function(b){
+    b.addEventListener('click', function(){ lvl = b.dataset.v; render(); });
+  });
+  [].forEach.call(document.querySelectorAll('[data-pick]'), function(a){
+    a.addEventListener('click', function(){ disc = a.dataset.pick; render(); });
+  });
+  render();
+
+  /* Sezon */
+  var MON = ['sty','lut','mar','kwi','maj','cze','lip','sie','wrz','paź','lis','gru'];
+  var months = document.getElementById('months');
+  MON.forEach(function(m){ var s = document.createElement('span'); s.textContent = m; months.appendChild(s); });
+  var rows = [
+    {name:'Skoki na rowerze', range:'kwiecień – październik', cls:'bike', on:[4,5,6,7,8,9,10]},
+    {name:'Elektryczne motocykle', range:'marzec – listopad', cls:'moto', on:[3,4,5,6,7,8,9,10,11]},
+    {name:'Snowboard', range:'grudzień – marzec', cls:'snow', on:[12,1,2,3]}
+  ];
+  var host = document.getElementById('rows');
+  rows.forEach(function(r){
+    var wrap = document.createElement('div'); wrap.className = 'srow';
+    wrap.innerHTML = '<div class="h"><b>' + r.name + '</b><span>' + r.range + '</span></div>';
+    var strip = document.createElement('div'); strip.className = 'season ' + r.cls; strip.setAttribute('aria-hidden','true');
+    for (var i = 1; i <= 12; i++){
+      var c = document.createElement('i');
+      if (r.on.indexOf(i) > -1) c.className = 'on';
+      strip.appendChild(c);
+    }
+    wrap.appendChild(strip);
+    host.appendChild(wrap);
+  });
+
+  /* Formularz: otwiera pocztę z gotową wiadomością */
+  document.getElementById('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('f-name').value.trim();
+    var mail = document.getElementById('f-mail').value.trim();
+    var d = document.getElementById('f-disc').value;
+    var l = document.getElementById('f-lvl').value;
+    var lvlText = document.getElementById('f-lvl').selectedOptions[0].textContent;
+    var msg = document.getElementById('f-msg').value.trim();
+    var gopro = document.getElementById('f-gopro').checked;
+    var subject = 'Zapytanie o termin: ' + NAMES[d];
+    var body = 'Imię: ' + name + '\nE-mail: ' + mail + '\nSzkolenie: ' + NAMES[d] + '\nPoziom: ' + lvlText + (gopro ? '\nKamera GoPro: tak' : '') + (msg ? '\n\n' + msg : '');
+    document.getElementById('status').textContent = 'Otwieramy Twoją pocztę z gotową wiadomością. Jeśli nic się nie stało, napisz na kontakt@rush.example.';
+    window.location.href = 'mailto:kontakt@rush.example?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+})();
+</script>
+</body>
+</html>
